@@ -1,18 +1,20 @@
-
 export default (state, action) => {
+    let newState;
     switch (action.type) {
         case "ADD_TASK":
-            return {
+            newState = {
                 ...state,
                 tasks: [action.payload, ...state.tasks],
             };
+            break;
         case "REMOVE_TASK":
-            return {
+            newState = {
                 ...state,
                 tasks: state.tasks.filter((task) => task.id !== action.payload),
             };
+            break;
         case "PIN_TASK":
-            return {
+            newState = {
                 ...state,
                 tasks: state.tasks.map((task) =>
                     task.id === action.payload
@@ -20,8 +22,9 @@ export default (state, action) => {
                         : task
                 ),
             };
+            break;
         case "TOGGLE_TASK":
-            return {
+            newState = {
                 ...state,
                 tasks: state.tasks.map((task) =>
                     task.id === action.payload
@@ -29,7 +32,16 @@ export default (state, action) => {
                         : task
                 ),
             };
+            break;
         default:
-            return state;
+            newState = state;
     }
-}
+
+    try {
+        localStorage.setItem('appState', JSON.stringify(newState));
+    } catch (error) {
+        console.error("Error saving to localStorage:", error);
+    }
+
+    return newState;
+};

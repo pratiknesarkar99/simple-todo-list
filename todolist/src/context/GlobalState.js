@@ -1,6 +1,5 @@
 import React, { useReducer, createContext } from "react";
 import AppReducer from "./AppReducer";
-import { Task } from "../components/Task";
 
 // interface Itask {
 //     id: number;
@@ -9,10 +8,18 @@ import { Task } from "../components/Task";
 //     pinned: boolean;
 // }
 
+const getInitialState = () => {
+    try {
+        const storedState = localStorage.getItem('appState');
+        return storedState ? JSON.parse(storedState) : { tasks: [] };
+    } catch (error) {
+        console.error("Error parsing localStorage data:", error);
+        return { tasks: [] };
+    }
+};
+
 // Initial state
-const initialState = {
-    tasks: []
-}
+const initialState = getInitialState();
 
 export const GlobalContext = createContext(initialState);
 
