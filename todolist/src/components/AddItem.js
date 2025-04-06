@@ -1,10 +1,20 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { GlobalContext } from "../context/GlobalState";
 
 export const AddItem = () => {
     const [text, setText] = useState("");
 
+    const { addTask } = useContext(GlobalContext);
+
     const onSubmit = () => {
-        console.log("Item added:", text);
+        const task = {
+            id: Math.floor(Math.random() * 100000),
+            description: text,
+            pinned: false,
+            completed: false,
+        }
+
+        addTask(task);
         setText("");
     }
 

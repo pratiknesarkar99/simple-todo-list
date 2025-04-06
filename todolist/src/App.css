@@ -42,7 +42,7 @@ h4 {
 
 .container {
 
-  .pinned-item,
+  .pinned-items,
   .task-list {
     border: 1px dotted;
     padding: 5px;
@@ -50,14 +50,35 @@ h4 {
     border-radius: 8px;
   }
 
-  .task-list {
+  .task-list,
+  .pinned-items {
     .task {
+      align-items: center;
+
       input {
         margin-right: 10px;
       }
 
       display: flex;
       border-bottom: #bbb 1px solid;
+
+      .task-text {
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+
+      }
+
+      .task-btns {
+        display: flex;
+        justify-content: space-between;
+        padding: auto;
+
+        >img {
+          width: 10px;
+          height: 10px;
+        }
+      }
     }
   }
 
@@ -89,13 +110,33 @@ h4 {
 }
 
 
-.btn:focus,
-.delete-btn:focus {
-  outline: none;
+.delete-btn,
+.pin-btn {
+  background: transparent;
+  cursor: pointer;
+  border: 0;
+  padding: 8px;
+  transition: opacity 0.3s ease;
+  width: 30px;
+  align-self: center;
+
 }
 
-.btn:hover,
-.delete-btn:hover {
-  opacity: 1;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 3px 6px rgba(0, 0, 0, 0.24);
+
+@media (max-width: 320px) {
+  .container {
+    width: 300px;
+  }
+}
+
+.nothing-here {
+  text-align: center;
+  font-size: 20px;
+  color: #bbb;
+  margin: 20px 0;
+}
+
+.disabled {
+  opacity: 0.5;
+  pointer-events: none;
 }

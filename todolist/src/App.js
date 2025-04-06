@@ -1,19 +1,20 @@
 import './App.css';
 import { AddItem } from './components/AddItem';
 import { Header } from './components/Header';
-import { PinnedItem } from './components/PinnedItem';
+import { PinnedItems } from './components/PinnedItems';
 import { TaskList } from './components/TaskList';
+import { GlobalProvider } from './context/GlobalState';
 
 function App() {
   return (
-    <div className="App">
+    <GlobalProvider>
       <Header />
       <div className='container'>
         <AddItem />
-        <PinnedItem />
+        <PinnedItems />
         <TaskList number={5} />
       </div>
-    </div>
+    </GlobalProvider >
   );
 }
 
